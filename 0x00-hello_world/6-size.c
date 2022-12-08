@@ -10,14 +10,14 @@ int main(void)
 	int intType;
 	float fltType;
 	long int lgiType;
-	long long int llgiType;
+	long long int lTp;
 	char charType;
 
-	printf("Size of a int: %lu byte(s)\n", (unsigned long)sizeof(intType));
-	printf("Size of a float: %lu byte(s)\n", (unsigned long)sizeof(fltType));
-	printf("Size of a long int: %lu byte(s)\n", (unsigned long)sizeof(lgiType));
-	printf("Size of a long long int: %lu byte(s)\n", (unsigned long)sizeof(llgiType));
 	printf("Size of a char: %lu byte(s)\n", (unsigned long)sizeof(charType));
+	printf("Size of a int: %lu byte(s)\n", (unsigned long)sizeof(intType));
+	printf("Size of a long int: %lu byte(s)\n", (unsigned long)sizeof(lgiType));
+	printf("Size of a long long int: %lu byte(s)\n", (unsigned long)sizeof(lTp));
+	printf("Size of a float: %lu byte(s)\n", (unsigned long)sizeof(fltType));
 	return (0);
 }
 
