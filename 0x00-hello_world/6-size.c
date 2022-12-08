@@ -10,7 +10,7 @@ int main(void)
 	int intType;
 	float fltType;
 	double dblType;
-	char chartype;
+	char charType;
 
 	printf("Size of a int: %lu byte(s)\n", (unsigned long)sizeof(intType));
 	printf("Size of a float: %lu byte(s)\n", (unsigned long)sizeof(fltType));
