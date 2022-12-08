@@ -12,11 +12,10 @@ int main(void)
 	double dblType;
 	char chartype;
 
-	printf("Size of int: %ld bytes\n",sizeof(intType));
-	printf("Size of float: %ld bytes\n",sizeof(fltType));
-	printf("Size of double: %ld bytes\n",sizeof(dblType));
-	printf("Size of char: %ld bytes\n",sizeof(charType));
-
+	printf("Size of a int: %lu byte(s)\n", (unsigned long)sizeof(intType));
+	printf("Size of a float: %lu byte(s)\n", (unsigned long)sizeof(fltType));
+	printf("Size of a double: %lu byte(s)\n", (unsigned long)sizeof(dblType));
+	printf("Size of a char: %lu byte(s)\n", (unsigned long)sizeof(charType));
 	return (0);
 }
 
