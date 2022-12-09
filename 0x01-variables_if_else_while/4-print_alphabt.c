@@ -16,7 +16,7 @@ int main(void)
 	E = 'q';
 	Q = 'e';
 
-	for (small = 'a'; smal <= 'z'; small++)
+	for (small = 'a'; small <= 'z'; small++)
 	{
 		if (small != E && small != Q)
 			putchar(small);
