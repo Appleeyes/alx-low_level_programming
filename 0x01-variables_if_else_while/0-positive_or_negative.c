@@ -1,13 +1,11 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
-
 /**
  * main - Entry point
  *
- * Result: 0(Success)
+ * Result: Always 0 (Success)
  */
-
 int main(void)
 {
 	int n;
