@@ -15,10 +15,10 @@ int _isalpha(int c)
 		for (small = 'a'; small <= 'z'; small++)
 		{
 			if (c == big && c == small)
-			return (1);
+				return (1);
+			else
+				return (0);
 		}
-		else
-		return (0);
 	}
 }
 
