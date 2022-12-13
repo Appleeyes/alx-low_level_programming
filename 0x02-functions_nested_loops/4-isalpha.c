@@ -9,15 +9,16 @@
 int _isalpha(int c)
 {
 	char big, small;
+	int letter = 0;
 
 	for (big = 'A'; big <= 'Z'; big++)
 	{
 		for (small = 'a'; small <= 'z'; small++)
 		{
 			if (c == big && c == small)
-				return (1);
+				letter = 1;
 		}
 	}
-	return (1);
+	return (letter);
 }
 
