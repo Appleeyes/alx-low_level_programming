@@ -15,7 +15,7 @@ int _isalpha(int c)
 	{
 		for (small = 'a'; small <= 'z'; small++)
 		{
-			if (c == big && c == small)
+			if (c == big || c == small)
 				letter = 1;
 		}
 	}
