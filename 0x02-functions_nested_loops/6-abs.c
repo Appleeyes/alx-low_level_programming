@@ -9,8 +9,8 @@
 int _abs(int b)
 {
 	if (b >= 0)
-		return (r);
+		return (b);
 	else
-		return (r * -1);
+		return (b * -1);
 }
 
