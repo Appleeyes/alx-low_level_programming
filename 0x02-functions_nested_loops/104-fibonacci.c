@@ -31,14 +31,13 @@ int main(void)
 	{
 		h = c + e;
 		i = d + f;
-
 		if (d + f > 9999999999)
 		{
 			h += 1;
 			i %= 10000000000;
 		}
-		printf("%lu%lu", h, i);
 
+		printf("%lu%lu", h, i);
 		if (count != 98)
 			printf(", ");
 
