@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - prints prime factors of 612852475143
  *
  * Return: Always 0 (Success)
  */
