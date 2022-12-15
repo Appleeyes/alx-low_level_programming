@@ -1,18 +1,16 @@
 #include "main.h"
 
 /**
- * main - Entry point
- *
- * Return - Always 0
+ * positive_or_negative - a function that prints positive or negative integer
+ *@i: input integer
+ * Return - Empty
  */
 
-int main(void)
+void positive_or_negative(int i)
 {
-	int n;
+	int i;
 
-	n = 0;
-	positive_or_negative(n);
-
-	return (0);
+	i = 0;
+	positive_or_negative(i);
 }
 
