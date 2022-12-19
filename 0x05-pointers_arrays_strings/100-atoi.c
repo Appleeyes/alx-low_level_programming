@@ -1,36 +1,48 @@
-#include <stdio.h>
-#include "main.h"
-
+#include "holberton.h"
 /**
- * _atoi - this is a function that convert a string to an integer.
- * @s: input character
- * Return: values after converting
- */
-
+  * _atoi- convert a string to an integer.
+  * @s: string input
+  * Return: int number
+**/
 int _atoi(char *s)
 {
-	int a = 1;
-	unsigned int b = 0;
-	char null = 0;
+	int number2 = 0, size = 0, negatives = 0, p = 1, j, start = 0, end;
+	unsigned int number = 0;
 
-	while (*s)
+	if (s[0] == '\0')
+	{ return (number2); }
+	while (s[size] != '\0')
 	{
-		if (*s == '_')
-			a *= -1;
-
-		if (*s >= '0' && *s <= '9')
-		{
-			null = 1;
-			b = b * 10 + *s - '0';
-		}
-
-		else if (null)
-			break;
-		s++;
+	size++;
 	}
-
-	if (a < 0)
-		b = (-b);
-
-	return (b);
+	while (s[start] < 48 || s[start] > 57)
+	{
+	start++;
+		if (start == size)
+		{ return (number2); }
+	}
+	end = start;
+	while (s[end + 1] > 47 && s[end + 1] < 58)
+	{
+	end++;
+	}
+	for (j = 0; j < start; j++)
+	{
+	if (s[j] == 45)
+	{ negatives++; }
+	}
+	for (j = end; j >= start; j--)
+	{
+	number = number + (s[j] - '0') * p;
+	if (p < 1000000000)
+	{ p = p * 10; }
+	}
+	if (number == 2147483648 && (negatives % 2 != 0))
+	{ number2 = -2147483648; }
+	else
+	{ number2 = number;
+	if (negatives % 2 != 0)
+	{ number2 = -number2; }
+	}
+return (number2);
 }
