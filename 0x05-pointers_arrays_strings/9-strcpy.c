@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _strcpy - this is a function that copies the string pointed
  * to by src, including the terminating null byte (\0),
@@ -8,7 +7,6 @@
  * @src: pointer to source string
  * Return: value after compiling
  */
-
 char *_strcpy(char *dest, char *src)
 {
 	char *n = dest;
