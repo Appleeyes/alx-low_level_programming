@@ -1,12 +1,12 @@
 #include "main.h"
 /**
-  * infinite_add - adds two numbers
-  * @n1: input character
-  * @n2: another input character
-  * @r: result
-  * @size_r: size result
-  * Return: result of the addition
-**/
+ * infinite_add - adds two numbers
+ * @n1: input character
+ * @n2: another input character
+ * @r: result
+ * @size_r: size result
+ * Return: result of the addition
+*/
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
 	int i = 0, j = 0, a, b, c, n, aux, dec = 0;
