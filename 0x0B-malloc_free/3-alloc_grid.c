@@ -2,31 +2,50 @@
 #include <stdlib.h>
 
 /**
- * alloc_grid - A function that returns a pointer to a
- * 2 dimensional array of integers
- * @width: An input integer at number of columns
- * @height: An input integer at number of rows
- * Return: pointer to a 2D array, NULL on failure
+ * alloc_grid - this function create 2 dimensional array of int(s).
+ * @width: input character for width
+ * @height: ibput character for height
+ *
+ * Return: returns 2 dimensional array of int(s).
  */
+
 int **alloc_grid(int width, int height)
 {
-	int **array, i = 0, j = 0;
+	int iterator, iterator_;
+	int **newArray;
 
-	if (width <= 0 || height <= 0)
+	if (width == 0 || height == 0)
 		return (NULL);
 
-	array = (int **)malloc(sizeof(int *) * height);
-	if (array == NULL)
-		return (NULL);
-	for (; i < height; i++)
+	newArray = (int **)malloc(sizeof(int *) * height);
+
+	if (newArray == NULL)
 	{
-		array[i] = (int *)malloc(sizeof(int) * width);
-		if (array[i] == NULL)
-			return (NULL);
+		free(newArray);
+		return (NULL);
 	}
 
-	for (i = 0; i < height; i++)
-		for (; j < width; j++)
-			array[i][j] = 0;
-	return (array);
+	for (iterator = 0; iterator < height; iterator++)
+	{
+		newArray[iterator] = (int *)malloc(sizeof(int) * width);
+
+		if (newArray[iterator] != NULL)
+		{
+			for (iterator_ = 0; iterator_ < width; iterator_++)
+				newArray[iterator][iterator_] = 0;
+		} else
+		{
+			while (iterator >= 0)
+			{
+				free(newArray[iterator]);
+				iterator--;
+			}
+
+			free(newArray);
+			return (NULL);
+
+		}
+	}
+
+	return (newArray);
 }
