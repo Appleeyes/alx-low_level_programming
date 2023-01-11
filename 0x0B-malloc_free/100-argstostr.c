@@ -3,7 +3,7 @@
 #include "main.h"
 /**
  * argstostr - main entry
- * @ac: input character 
+ * @ac: input character
  * @av: double pointer array
  * Return: 0
  */
