@@ -1,47 +1,53 @@
-#include "dog.h"
 #include <stdlib.h>
-
+#include <stdio.h>
+#include "dog.h"
+int get_len(int i);
+char *str_cpy(char *dest, char *src);
 /**
- * new_dog - creates a new dog structure
- * @name: Dog's name
- * @age: Dog's age
- * @owner: Dog's owner
- * Return: returns a pointer to newly created dog structure
+ * new_dog - a function that creates a new dog
+ * get len of name + owner, malloc them, cpy name + owner to new
+ * @name: name
+ * @age: age
+ * @owner: owner
+ * Return: 0
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	char *cpyname, *cpyowner;
-	int len_name = 0, len_owner = 0, i;
+	dog_t *new_name;
+	char *copy_name, *copy_owner;
+	unsigned int x, name_len = 0, owner_len = 0;
 
-	if (name == NULL || owner == NULL)
+	new_name = malloc(sizeof(dog_t));
+	if (name == NULL)
+		return (NULL);
+	if (name == NULL || age <= 0 || owner == NULL)
+	{
+		free(new_name);
+		return (NULL);
+	}
+
+	for (x = 0; name[x] != '\0'; x++)
+		name_len++;
+
+	for (x = 0; owner[x] != '\0'; x++)
+		owner_len++;
+
+	copy_name = malloc(sizeof(char) * (name_len + 1));
+	if (copy_name == NULL)
 		return (NULL);
 
-	while (name[len_name])
-		len_name++;
-	while (owner[len_owner])
-		len_owner++;
-
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
+	copy_owner = malloc(sizeof(char) * (owner_len + 1));
+	if (copy_owner == NULL)
 		return (NULL);
 
-	cpyname = malloc(len_name + 1);
-	if (cpyname == NULL)
-		return (NULL);
-	for (i = 0; name[i]; i++)
-		cpyname[i] = name[i];
-	cpyname[i] = '\0';
+	for (x = 0; x <= name_len; x++)
+		copy_name[x] = name[x];
 
-	cpyowner = malloc(len_owner + 1);
-	if (cpyowner == NULL)
-		return (NULL);
-	for (i = 0; owner[i]; i++)
-		cpyowner[i] = owner[i];
-	cpyowner[i] = '\0';
+	for (x = 0; x <= owner_len; x++)
+		copy_owner[x] = owner[x];
 
-	new_dog->name = cpyname;
-	new_dog->age = age;
-	new_dog->owner = cpyowner;
-	return (new_dog);
+	new_name->name = copy_name;
+	new_name->owner = copy_owner;
+	new_name->age = age;
+	return (new_name);
 }
