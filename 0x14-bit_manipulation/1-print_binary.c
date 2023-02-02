@@ -7,22 +7,28 @@
  */
 void print_binary(unsigned long int n)
 {
-	unsigned int flag = 0, max = 32768; /* 1000 0000 0000 0000 */
+	int i = 0, count, k, temp;
 
 	if (n == 0)
 	{
-		_putchar('0');
+		printf("0");
 		return;
 	}
-	while (max)
+
+	temp = n;
+
+	while (temp != 0)
 	{
-		if (flag == 1 && (n & max) == 0)
-			_putchar('0');
-		else if ((n & max) != 0)
-		{
-			_putchar('1');
-			flag = 1;
-		}
-		max >>= 1;
+		i++;
+		temp = temp >> 1;
+	}
+
+	for (count = i - 1; count >= 0; count--)
+	{
+		k = n >> count;
+		if (k & 1)
+			printf("1");
+		else
+			printf("0");
 	}
 }
