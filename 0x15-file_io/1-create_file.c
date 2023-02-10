@@ -1,34 +1,69 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
 #include "main.h"
+
 /**
- * create_file - Entry Point
- * @filename: file name
- * @text_content: null terminated string to write
- * Return: 1
+ * create_file - append to file
+ * @filename: path to file
+ * @text_content: content
+ * Return: chars read
  */
+
 int create_file(const char *filename, char *text_content)
 {
-	int file, i = 0;
+	int fd;
+	ssize_t w;
+	int size;
+	char *mem;
 
-	if (filename == NULL)
-		return (-1);
-
-	file = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
-	if (file == -1)
-		return (-1);
-
-	while (text_content[i])
-		i++;
-
-	if (text_content == NULL)
+	if (!filename)
 	{
-		close(file);
 		return (-1);
 	}
-	else
+	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+	if (fd == -1)
+		return (-1);
+	if (!text_content)
 	{
-		write(file, text_content, i);
+		close(fd);
+		return (1);
 	}
-
-	close(file);
+	size = _strlen(text_content);
+	mem = malloc(sizeof(char) * size);
+	if (!mem)
+	{
+		close(fd);
+		return (-1);
+	}
+	w = write(fd, text_content, size);
+	if (w == -1)
+	{
+		close(fd);
+		free(mem);
+		return (-1);
+	}
+	close(fd);
+	free(mem);
 	return (1);
+}
+
+/**
+ * _strlen - len
+ *
+ * @s: is a pointer to a char
+ *
+ * Return: Always 0.
+ */
+
+int _strlen(const char *s)
+{
+	int i = 0;
+
+	while (*(s + i) != '\0')
+	{
+		i++;
+	}
+
+	return (i);
 }
