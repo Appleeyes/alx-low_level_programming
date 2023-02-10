@@ -1,89 +1,73 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int safe_close(int);
+#include "main.h"
+void closer(int arg_files);
 /**
- * main - Main function to copy files
- * @argc: The number of passed arguments
- * @argv: The pointers to array arguments
- * Return: 1 on success, exits on failure
+ * main - Entry Point
+ * @argc: # of args
+ * @argv: array pointer for args
+ * Return: 0
  */
 int main(int argc, char *argv[])
 {
-	char buffer[1024];
-	int bytes_read = 0, _EOF = 1, from_fd = -1, to_fd = -1, error = 0;
+	int file_from, file_to, file_from_r, wr_err;
+	char buf[1024];
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
-	from_fd = open(argv[1], O_RDONLY);
-	if (from_fd < 0)
+	file_from = open(argv[1], O_RDONLY);
+	if (file_from == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 
-	to_fd = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
-	if (to_fd < 0)
+	file_to = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
+	if (file_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		safe_close(from_fd);
+		dprintf(2, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 
-	while (_EOF)
+	while (file_from_r >= 1024)
 	{
-		_EOF = read(from_fd, buffer, 1024);
-		if (_EOF < 0)
+		file_from_r = read(file_from, buf, 1024);
+		if (file_from_r == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			safe_close(from_fd);
-			safe_close(to_fd);
+			dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+			closer(file_from);
+			closer(file_to);
 			exit(98);
 		}
-		else if (_EOF == 0)
-			break;
-		bytes_read += _EOF;
-		error = write(to_fd, buffer, _EOF);
-		if (error < 0)
+		wr_err = write(file_to, buf, file_from_r);
+		if (wr_err == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			safe_close(from_fd);
-			safe_close(to_fd);
+			dprintf(2, "Error: Can't write to %s\n", argv[2]);
 			exit(99);
 		}
 	}
-	error = safe_close(to_fd);
-	if (error < 0)
-	{
-		safe_close(from_fd);
-		exit(100);
-	}
-	error = safe_close(from_fd);
-	if (error < 0)
-		exit(100);
+
+	closer(file_from);
+	closer(file_to);
 	return (0);
 }
 
 /**
- * safe_close - A function that closes a file and prints error when closed file
- * @description: Description error for closed file
- * Return: 1 on success, -1 on failure
+ * closer - close with error
+ * @arg_files: argv 1 or 2
+ * Return: void
  */
-int safe_close(int description)
+void closer(int arg_files)
 {
-	int error;
+	int close_err;
 
-	error = close(description);
-	if (error < 0)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", description);
-	return (error);
+	close_err = close(arg_files);
+
+	if (close_err == -1)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", arg_files);
+		exit(100);
+	}
 }
